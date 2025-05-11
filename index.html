@@ -157,28 +157,8 @@
 <section>
   <h2>MIX実績</h2>
   <div class="video-scroll-wrapper" id="videoScroll">
-    <div class="video-item">
-      <iframe src="https://drive.google.com/file/d/1tXiQ_b7wSaihZX_2mST6nDIOkgkta9Jc/preview" allowfullscreen></iframe>
-      <p><strong>『RUMOR』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
-    </div>
-    <div class="video-item">
-      <iframe src="https://drive.google.com/file/d/1joNXcLwTWDJfNbBKgO4owDUWAjPUZ_96/preview" allowfullscreen></iframe>
-      <p><strong>『QUEEN』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
-    </div>
-    <div class="video-item">
-      <iframe src="https://drive.google.com/file/d/1-TCY7_iwl6RXKDOLL39qF3idNx1FgOH7/preview" allowfullscreen></iframe>
-      <p><strong>『月のワルツ』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
-    </div>
-    <div class="video-item">
-      <iframe src="https://drive.google.com/file/d/1FuB4w9JEUOnFmiZuSnX5roLtiyblqMwN/preview" allowfullscreen></iframe>
-      <p><strong>『少女レイ』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
-    </div>
-    <div class="video-item">
-      <iframe src="https://drive.google.com/file/d/1brm3tgaYX8e6MBPU6ofu4BHdenm49ZpK/preview" allowfullscreen></iframe>
-      <p><strong>『ヤミタイガール』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
-    </div>
+    <!-- 各動画カードはここに入る -->
   </div>
-
   <div class="cta-link">
     <a href="https://sites.google.com/view/akakujira/%E3%83%9B%E3%83%BC%E3%83%A0" target="_blank">▶︎ 歌ってみたMIX依頼はこちら</a>
   </div>
@@ -190,17 +170,42 @@
 
 <script>
   const scrollContainer = document.getElementById('videoScroll');
+  const videos = [
+    {
+      url: "https://drive.google.com/file/d/1tXiQ_b7wSaihZX_2mST6nDIOkgkta9Jc/preview",
+      title: "RUMOR"
+    },
+    {
+      url: "https://drive.google.com/file/d/1joNXcLwTWDJfNbBKgO4owDUWAjPUZ_96/preview",
+      title: "QUEEN"
+    },
+    {
+      url: "https://drive.google.com/file/d/1-TCY7_iwl6RXKDOLL39qF3idNx1FgOH7/preview",
+      title: "月のワルツ"
+    },
+    {
+      url: "https://drive.google.com/file/d/1FuB4w9JEUOnFmiZuSnX5roLtiyblqMwN/preview",
+      title: "少女レイ"
+    },
+    {
+      url: "https://drive.google.com/file/d/1brm3tgaYX8e6MBPU6ofu4BHdenm49ZpK/preview",
+      title: "ヤミタイガール"
+    }
+  ];
 
-  // クローンで無限スクロール
+  videos.forEach(video => {
+    const div = document.createElement('div');
+    div.className = 'video-item';
+    div.innerHTML = `<iframe src="${video.url}" allowfullscreen></iframe>
+      <p><strong>『${video.title}』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>`;
+    scrollContainer.appendChild(div);
+  });
+
   const cloneVideos = () => {
     const items = [...scrollContainer.children];
-    items.forEach(item => {
-      const clone = item.cloneNode(true);
-      scrollContainer.appendChild(clone);
-    });
+    items.forEach(item => scrollContainer.appendChild(item.cloneNode(true)));
   };
 
-  // 自動スクロール
   let scrollSpeed = 1;
   let animationId;
   const autoScroll = () => {
@@ -210,10 +215,8 @@
     }
     animationId = requestAnimationFrame(autoScroll);
   };
-
   const stopScroll = () => cancelAnimationFrame(animationId);
 
-  // IntersectionObserverで動画カード表示アニメーション
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -226,7 +229,6 @@
     autoScroll();
   });
 
-  // スクロール操作対応
   scrollContainer.addEventListener('mouseenter', stopScroll);
   scrollContainer.addEventListener('mouseleave', autoScroll);
   scrollContainer.addEventListener('touchstart', stopScroll);
