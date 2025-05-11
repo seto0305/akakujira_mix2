@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>歌ってみたMIX ポートフォリオ</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
@@ -17,25 +17,25 @@
     header {
       text-align: center;
       padding: 40px 20px;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     header h1 {
-      font-size: 1.6em;
+      font-size: clamp(1.4em, 6vw, 2.4em);
       display: inline-block;
+      overflow: hidden;
       border-right: 0.15em solid #bb86fc;
       white-space: nowrap;
-      overflow: hidden;
-      animation: typing 2s steps(30, end), blink 0.75s step-end infinite;
+      animation: typing 2.5s steps(40, end), blink 0.75s step-end infinite;
     }
 
     @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
+      from { width: 0 }
+      to { width: 100% }
     }
 
     @keyframes blink {
-      50% { border-color: transparent; }
+      50% { border-color: transparent }
     }
 
     header p {
@@ -51,7 +51,7 @@
     }
 
     h2 {
-      font-size: 1.3em;
+      font-size: 1.4em;
       margin-bottom: 20px;
       border-bottom: 2px solid #444;
       padding-bottom: 10px;
@@ -75,7 +75,7 @@
       background: #1e1e1e;
       border-top: 4px solid #bb86fc;
       border-radius: 10px;
-      width: 260px;
+      width: 280px;
       flex-shrink: 0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
       padding: 10px;
@@ -84,7 +84,7 @@
 
     .video-item iframe {
       width: 100%;
-      height: 150px;
+      height: 160px;
       border: none;
     }
 
@@ -120,15 +120,6 @@
       font-size: 0.8em;
       color: #666;
       padding: 20px;
-    }
-
-    @media (min-width: 481px) {
-      .video-item {
-        width: 300px;
-      }
-      .video-item iframe {
-        height: 160px;
-      }
     }
   </style>
 </head>
@@ -177,15 +168,15 @@
 
 <script>
   const scrollContainer = document.getElementById('videoScroll');
-  const items = Array.from(scrollContainer.children);
+  const items = [...scrollContainer.children];
   items.forEach(item => scrollContainer.appendChild(item.cloneNode(true)));
 
-  let scrollSpeed = 1;
   let scrollTimer;
-  let userScrolled = false;
+  let scrollSpeed = 1;
+  let userInteracted = false;
 
   function autoScroll() {
-    if (!userScrolled) {
+    if (!userInteracted) {
       scrollContainer.scrollLeft += scrollSpeed;
       if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
         scrollContainer.scrollLeft = 0;
@@ -196,24 +187,24 @@
 
   scrollContainer.addEventListener('mouseenter', () => cancelAnimationFrame(scrollTimer));
   scrollContainer.addEventListener('mouseleave', () => {
-    userScrolled = false;
+    userInteracted = false;
     scrollTimer = requestAnimationFrame(autoScroll);
   });
 
-  scrollContainer.addEventListener('touchstart', () => userScrolled = true);
-  document.addEventListener('touchstart', function(e) {
-    if (!e.target.closest('#videoScroll')) {
-      userScrolled = false;
-    }
-  });
-
-  scrollContainer.addEventListener('wheel', function(e) {
+  scrollContainer.addEventListener('touchstart', () => userInteracted = true);
+  scrollContainer.addEventListener('wheel', e => {
     if (!e.shiftKey) {
       e.preventDefault();
-      userScrolled = true;
+      userInteracted = true;
       scrollContainer.scrollLeft += e.deltaY;
     }
   }, { passive: false });
+
+  document.body.addEventListener('touchstart', e => {
+    if (!e.target.closest('#videoScroll')) {
+      userInteracted = false;
+    }
+  });
 
   document.addEventListener('DOMContentLoaded', () => {
     scrollTimer = requestAnimationFrame(autoScroll);
