@@ -4,64 +4,58 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>歌ってみたMIX ポートフォリオ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <style>
     @font-face {
       font-family: 'PixelMplus';
-      src: url('https://cdn.jsdelivr.net/gh/qrac/pixelmplus/pixelmplus-10-regular.woff2') format('woff2');
+      src: url('https://cdn.jsdelivr.net/gh/qrac/pixelmplus/pixelmplus-10-regular.woff2') format('woff2'),
+           url('https://cdn.jsdelivr.net/gh/qrac/pixelmplus/pixelmplus-10-regular.woff') format('woff');
       font-weight: normal;
       font-style: normal;
     }
 
     body {
-      font-family: 'PixelMplus', 'Noto Sans JP', sans-serif;
       margin: 0;
-      padding: 0;
       background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+      font-family: 'PixelMplus', monospace;
       color: #e0e0e0;
     }
 
     header {
-      padding: 80px 20px;
       text-align: center;
-      color: #ffffff;
-      overflow: hidden;
+      padding: 60px 20px;
     }
 
     header h1 {
-      font-family: 'PixelMplus', monospace;
-      font-size: 2.4em;
-      margin: 0;
+      font-size: 2em;
       white-space: nowrap;
       overflow: hidden;
-      border-right: .15em solid #bb86fc;
-      animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+      border-right: 0.15em solid #bb86fc;
+      animation: typing 2s steps(20, end), blink 0.75s step-end infinite;
     }
 
     @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+      from { width: 0; }
+      to { width: 100%; }
     }
 
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #bb86fc }
+    @keyframes blink {
+      50% { border-color: transparent; }
     }
 
     header p {
-      font-size: 1.2em;
+      font-size: 1em;
       margin-top: 10px;
-      color: #bbbbbb;
+      color: #bbb;
     }
 
     section {
-      padding: 60px 20px;
+      padding: 40px 20px;
       max-width: 1000px;
       margin: auto;
     }
 
     h2 {
-      font-size: 2em;
+      font-size: 1.5em;
       margin-bottom: 20px;
       border-bottom: 2px solid #444;
       padding-bottom: 10px;
@@ -69,10 +63,9 @@
 
     .video-scroll-wrapper {
       display: flex;
-      overflow-x: auto;
       gap: 20px;
+      overflow-x: auto;
       padding-bottom: 20px;
-      scroll-behavior: smooth;
     }
 
     .video-scroll-wrapper::-webkit-scrollbar {
@@ -81,20 +74,13 @@
 
     .video-item {
       background: #1e1e1e;
+      border-top: 4px solid #bb86fc;
       border-radius: 10px;
-      padding: 10px;
       width: 300px;
       flex-shrink: 0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      border-top: 4px solid #bb86fc;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease;
-    }
-
-    .video-item.visible {
-      opacity: 1;
-      transform: translateY(0);
+      padding: 10px;
+      text-align: center;
     }
 
     .video-item iframe {
@@ -106,30 +92,22 @@
     .video-item p {
       font-size: 0.9em;
       color: #ccc;
-      text-align: center;
       margin-top: 10px;
     }
 
     .cta-link {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 30px;
     }
 
     .cta-link a {
       display: inline-block;
       color: #bb86fc;
       border: 2px solid #bb86fc;
-      padding: 12px 24px;
+      padding: 10px 20px;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
       animation: pulse 2s infinite;
-    }
-
-    .cta-link a:hover {
-      background-color: #bb86fc;
-      color: #121212;
     }
 
     @keyframes pulse {
@@ -140,18 +118,9 @@
 
     footer {
       text-align: center;
-      font-size: 0.9em;
+      font-size: 0.8em;
       color: #666;
       padding: 20px;
-    }
-
-    @media (max-width: 480px) {
-      .video-item {
-        width: 260px;
-      }
-      .video-item iframe {
-        height: 150px;
-      }
     }
   </style>
 </head>
@@ -161,3 +130,42 @@
   <h1>歌ってみたMIX ポートフォリオ</h1>
   <p>過去にMIXした自分の歌ってみた動画です</p>
 </header>
+
+<section>
+  <h2>MIX実績</h2>
+  <div class="video-scroll-wrapper">
+    <div class="video-item">
+      <iframe src="https://drive.google.com/file/d/1tXiQ_b7wSaihZX_2mST6nDIOkgkta9Jc/preview" allowfullscreen></iframe>
+      <p>『RUMOR』<br>MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
+    </div>
+    <div class="video-item">
+      <iframe src="https://drive.google.com/file/d/1joNXcLwTWDJfNbBKgO4owDUWAjPUZ_96/preview" allowfullscreen></iframe>
+      <p>『QUEEN』<br>MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
+    </div>
+    <div class="video-item">
+      <iframe src="https://drive.google.com/file/d/1-TCY7_iwl6RXKDOLL39qF3idNx1FgOH7/preview" allowfullscreen></iframe>
+      <p>『月のワルツ』<br>MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
+    </div>
+    <div class="video-item">
+      <iframe src="https://drive.google.com/file/d/1FuB4w9JEUOnFmiZuSnX5roLtiyblqMwN/preview" allowfullscreen></iframe>
+      <p>『少女レイ』<br>MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
+    </div>
+    <div class="video-item">
+      <iframe src="https://drive.google.com/file/d/1brm3tgaYX8e6MBPU6ofu4BHdenm49ZpK/preview" allowfullscreen></iframe>
+      <p>『ヤミタイガール』<br>MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
+    </div>
+  </div>
+
+  <div class="cta-link">
+    <a href="https://sites.google.com/view/akakujira/%E3%83%9B%E3%83%BC%E3%83%A0" target="_blank">
+      ▶︎ 歌ってみたMIX依頼はこちら
+    </a>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 あかくじら / Twitter: @aka_kujira1234
+</footer>
+
+</body>
+</html>
