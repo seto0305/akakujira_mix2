@@ -66,6 +66,7 @@
       gap: 20px;
       overflow-x: auto;
       padding-bottom: 20px;
+      scroll-behavior: smooth;
     }
 
     .video-scroll-wrapper::-webkit-scrollbar {
@@ -133,7 +134,7 @@
 
 <section>
   <h2>MIX実績</h2>
-  <div class="video-scroll-wrapper">
+  <div class="video-scroll-wrapper" id="videoScroll">
     <div class="video-item">
       <iframe src="https://drive.google.com/file/d/1tXiQ_b7wSaihZX_2mST6nDIOkgkta9Jc/preview" allowfullscreen></iframe>
       <p>『RUMOR』<br>MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
@@ -166,6 +167,26 @@
 <footer>
   &copy; 2025 あかくじら / Twitter: @aka_kujira1234
 </footer>
+
+<script>
+  const scrollContainer = document.getElementById('videoScroll');
+  function autoScroll() {
+    scrollContainer.scrollLeft += 1;
+    if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+      scrollContainer.scrollLeft = 0;
+    }
+    requestAnimationFrame(autoScroll);
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    autoScroll();
+  });
+  scrollContainer.addEventListener('wheel', function(e) {
+    if (!e.shiftKey) {
+      e.preventDefault();
+      scrollContainer.scrollLeft += e.deltaY;
+    }
+  }, { passive: false });
+</script>
 
 </body>
 </html>
