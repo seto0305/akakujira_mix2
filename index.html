@@ -6,8 +6,15 @@
   <title>歌ってみたMIX ポートフォリオ</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'PixelMplus';
+      src: url('https://cdn.jsdelivr.net/gh/qrac/pixelmplus/pixelmplus-10-regular.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     body {
-      font-family: 'Noto Sans JP', sans-serif;
+      font-family: 'PixelMplus', 'Noto Sans JP', sans-serif;
       margin: 0;
       padding: 0;
       background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
@@ -22,7 +29,8 @@
     }
 
     header h1 {
-      font-size: 3em;
+      font-family: 'PixelMplus', monospace;
+      font-size: 2.4em;
       margin: 0;
       white-space: nowrap;
       overflow: hidden;
@@ -153,97 +161,3 @@
   <h1>歌ってみたMIX ポートフォリオ</h1>
   <p>過去にMIXした自分の歌ってみた動画です</p>
 </header>
-
-<section>
-  <h2>MIX実績</h2>
-  <div class="video-scroll-wrapper" id="videoScroll">
-    <!-- 各動画カードはここに入る -->
-  </div>
-  <div class="cta-link">
-    <a href="https://sites.google.com/view/akakujira/%E3%83%9B%E3%83%BC%E3%83%A0" target="_blank">▶︎ 歌ってみたMIX依頼はこちら</a>
-  </div>
-</section>
-
-<footer>
-  &copy; 2025 あかくじら / Twitter: @aka_kujira1234
-</footer>
-
-<script>
-  const scrollContainer = document.getElementById('videoScroll');
-  const videos = [
-    {
-      url: "https://drive.google.com/file/d/1tXiQ_b7wSaihZX_2mST6nDIOkgkta9Jc/preview",
-      title: "RUMOR"
-    },
-    {
-      url: "https://drive.google.com/file/d/1joNXcLwTWDJfNbBKgO4owDUWAjPUZ_96/preview",
-      title: "QUEEN"
-    },
-    {
-      url: "https://drive.google.com/file/d/1-TCY7_iwl6RXKDOLL39qF3idNx1FgOH7/preview",
-      title: "月のワルツ"
-    },
-    {
-      url: "https://drive.google.com/file/d/1FuB4w9JEUOnFmiZuSnX5roLtiyblqMwN/preview",
-      title: "少女レイ"
-    },
-    {
-      url: "https://drive.google.com/file/d/1brm3tgaYX8e6MBPU6ofu4BHdenm49ZpK/preview",
-      title: "ヤミタイガール"
-    }
-  ];
-
-  videos.forEach(video => {
-    const div = document.createElement('div');
-    div.className = 'video-item';
-    div.innerHTML = `<iframe src="${video.url}" allowfullscreen></iframe>
-      <p><strong>『${video.title}』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>`;
-    scrollContainer.appendChild(div);
-  });
-
-  const cloneVideos = () => {
-    const items = [...scrollContainer.children];
-    items.forEach(item => scrollContainer.appendChild(item.cloneNode(true)));
-  };
-
-  let scrollSpeed = 1;
-  let animationId;
-  const autoScroll = () => {
-    scrollContainer.scrollLeft += scrollSpeed;
-    if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-      scrollContainer.scrollLeft = 0;
-    }
-    animationId = requestAnimationFrame(autoScroll);
-  };
-  const stopScroll = () => cancelAnimationFrame(animationId);
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.1 });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    cloneVideos();
-    document.querySelectorAll('.video-item').forEach(el => observer.observe(el));
-    autoScroll();
-  });
-
-  scrollContainer.addEventListener('mouseenter', stopScroll);
-  scrollContainer.addEventListener('mouseleave', autoScroll);
-  scrollContainer.addEventListener('touchstart', stopScroll);
-
-  document.addEventListener('touchstart', function(e) {
-    if (!e.target.closest('#videoScroll')) autoScroll();
-  });
-
-  scrollContainer.addEventListener('wheel', function(e) {
-    if (!e.shiftKey) {
-      e.preventDefault();
-      scrollContainer.scrollLeft += e.deltaY;
-    }
-  }, { passive: false });
-</script>
-
-</body>
-</html>
