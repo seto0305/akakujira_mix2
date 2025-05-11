@@ -16,15 +16,17 @@
 
     header {
       text-align: center;
-      padding: 60px 20px;
+      padding: 40px 20px;
+      overflow-x: hidden;
     }
 
     header h1 {
-      font-size: 2em;
+      font-size: 1.6em;
+      display: inline-block;
+      border-right: 0.15em solid #bb86fc;
       white-space: nowrap;
       overflow: hidden;
-      border-right: 0.15em solid #bb86fc;
-      animation: typing 2s steps(20, end), blink 0.75s step-end infinite;
+      animation: typing 2s steps(30, end), blink 0.75s step-end infinite;
     }
 
     @keyframes typing {
@@ -37,7 +39,7 @@
     }
 
     header p {
-      font-size: 1em;
+      font-size: 0.95em;
       margin-top: 10px;
       color: #bbb;
     }
@@ -49,7 +51,7 @@
     }
 
     h2 {
-      font-size: 1.5em;
+      font-size: 1.3em;
       margin-bottom: 20px;
       border-bottom: 2px solid #444;
       padding-bottom: 10px;
@@ -61,6 +63,8 @@
       gap: 20px;
       scroll-behavior: smooth;
       padding-bottom: 20px;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
     }
 
     .video-scroll-wrapper::-webkit-scrollbar {
@@ -71,7 +75,7 @@
       background: #1e1e1e;
       border-top: 4px solid #bb86fc;
       border-radius: 10px;
-      width: 300px;
+      width: 260px;
       flex-shrink: 0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
       padding: 10px;
@@ -80,12 +84,12 @@
 
     .video-item iframe {
       width: 100%;
-      height: 160px;
+      height: 150px;
       border: none;
     }
 
     .video-item p {
-      font-size: 0.9em;
+      font-size: 0.85em;
       color: #ccc;
       margin-top: 10px;
     }
@@ -116,6 +120,15 @@
       font-size: 0.8em;
       color: #666;
       padding: 20px;
+    }
+
+    @media (min-width: 481px) {
+      .video-item {
+        width: 300px;
+      }
+      .video-item iframe {
+        height: 160px;
+      }
     }
   </style>
 </head>
@@ -169,21 +182,35 @@
 
   let scrollSpeed = 1;
   let scrollTimer;
+  let userScrolled = false;
 
   function autoScroll() {
-    scrollContainer.scrollLeft += scrollSpeed;
-    if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-      scrollContainer.scrollLeft = 0;
+    if (!userScrolled) {
+      scrollContainer.scrollLeft += scrollSpeed;
+      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+        scrollContainer.scrollLeft = 0;
+      }
     }
     scrollTimer = requestAnimationFrame(autoScroll);
   }
 
   scrollContainer.addEventListener('mouseenter', () => cancelAnimationFrame(scrollTimer));
-  scrollContainer.addEventListener('mouseleave', () => scrollTimer = requestAnimationFrame(autoScroll));
+  scrollContainer.addEventListener('mouseleave', () => {
+    userScrolled = false;
+    scrollTimer = requestAnimationFrame(autoScroll);
+  });
+
+  scrollContainer.addEventListener('touchstart', () => userScrolled = true);
+  document.addEventListener('touchstart', function(e) {
+    if (!e.target.closest('#videoScroll')) {
+      userScrolled = false;
+    }
+  });
 
   scrollContainer.addEventListener('wheel', function(e) {
     if (!e.shiftKey) {
       e.preventDefault();
+      userScrolled = true;
       scrollContainer.scrollLeft += e.deltaY;
     }
   }, { passive: false });
