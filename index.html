@@ -4,28 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>歌ってみたMIX ポートフォリオ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: "Helvetica Neue", sans-serif;
+      font-family: 'Noto Sans JP', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f9f9f9;
-      color: #333;
+      background-color: #121212;
+      color: #e0e0e0;
     }
 
     header {
-      background: url('header-bg.jpg') center/cover no-repeat;
+      background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
       padding: 80px 20px;
       text-align: center;
-      color: white;
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
+
     header h1 {
       font-size: 3em;
       margin: 0;
     }
+
     header p {
       font-size: 1.2em;
       margin-top: 10px;
+      color: #bbbbbb;
     }
 
     section {
@@ -37,22 +42,16 @@
     h2 {
       font-size: 2em;
       margin-bottom: 20px;
-      border-bottom: 2px solid #ddd;
+      border-bottom: 2px solid #444;
       padding-bottom: 10px;
-    }
-
-    .scroll-wrapper {
-      position: relative;
     }
 
     .video-scroll-wrapper {
       display: flex;
       overflow-x: auto;
-      white-space: nowrap;
-      scroll-behavior: auto;
-      -webkit-overflow-scrolling: touch;
-      touch-action: pan-x;
-      padding-bottom: 10px;
+      gap: 20px;
+      padding-bottom: 20px;
+      scroll-behavior: smooth;
     }
 
     .video-scroll-wrapper::-webkit-scrollbar {
@@ -60,64 +59,68 @@
     }
 
     .video-item {
-      flex: 0 0 auto;
-      width: 320px;
-      background: white;
+      background: #1e1e1e;
       border-radius: 10px;
       padding: 10px;
-      margin-right: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      border-top: 4px solid #6c63ff;
-      height: auto;
-      white-space: normal;
+      width: 300px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      border-top: 4px solid #bb86fc;
+      transition: transform 0.3s ease;
+    }
+
+    .video-item:hover {
+      transform: translateY(-5px);
     }
 
     .video-item iframe {
       width: 100%;
-      height: 180px;
+      height: 160px;
       border: none;
     }
 
     .video-item p {
+      font-size: 0.9em;
+      color: #ccc;
       text-align: center;
-      font-size: 0.95em;
-      white-space: normal;
-      word-break: break-word;
       margin-top: 10px;
-    }
-
-    @media (max-width: 480px) {
-      .video-item {
-        width: 280px;
-      }
-      .video-item iframe {
-        height: 160px;
-      }
     }
 
     .cta-link {
       text-align: center;
       margin-top: 40px;
     }
+
     .cta-link a {
-      color: #6c63ff;
+      display: inline-block;
+      color: #bb86fc;
+      border: 2px solid #bb86fc;
+      padding: 12px 24px;
+      border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      border: 2px solid #6c63ff;
-      padding: 10px 20px;
-      border-radius: 8px;
       transition: 0.3s;
     }
+
     .cta-link a:hover {
-      background-color: #6c63ff;
-      color: white;
+      background-color: #bb86fc;
+      color: #121212;
     }
 
     footer {
       text-align: center;
       font-size: 0.9em;
-      color: #777;
+      color: #666;
       padding: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .video-item {
+        width: 260px;
+      }
+      .video-item iframe {
+        height: 150px;
+      }
     }
   </style>
 </head>
@@ -130,86 +133,37 @@
 
 <section>
   <h2>MIX実績</h2>
-  <div class="scroll-wrapper">
-    <div class="video-scroll-wrapper" id="videoScroll">
-      <div class="video-item">
-        <iframe src="https://drive.google.com/file/d/1tXiQ_b7wSaihZX_2mST6nDIOkgkta9Jc/preview" allowfullscreen></iframe>
-        <p><strong>タイトル：</strong>『RUMOR』<br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
-      </div>
-      <div class="video-item">
-        <iframe src="https://drive.google.com/file/d/1joNXcLwTWDJfNbBKgO4owDUWAjPUZ_96/preview" allowfullscreen></iframe>
-        <p><strong>タイトル：</strong>『QUEEN』<br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
-      </div>
-      <div class="video-item">
-        <iframe src="https://drive.google.com/file/d/1-TCY7_iwl6RXKDOLL39qF3idNx1FgOH7/preview" allowfullscreen></iframe>
-        <p><strong>タイトル：</strong>『月のワルツ』<br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
-      </div>
-      <div class="video-item">
-        <iframe src="https://drive.google.com/file/d/1FuB4w9JEUOnFmiZuSnX5roLtiyblqMwN/preview" allowfullscreen></iframe>
-        <p><strong>タイトル：</strong>『少女レイ』<br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
-      </div>
-      <div class="video-item">
-        <iframe src="https://drive.google.com/file/d/1brm3tgaYX8e6MBPU6ofu4BHdenm49ZpK/preview" allowfullscreen></iframe>
-        <p><strong>タイトル：</strong>『ヤミタイガール』<br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
-      </div>
+  <div class="video-scroll-wrapper" id="videoScroll">
+    <div class="video-item">
+      <iframe src="https://drive.google.com/file/d/1tXiQ_b7wSaihZX_2mST6nDIOkgkta9Jc/preview" allowfullscreen></iframe>
+      <p><strong>『RUMOR』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
+    </div>
+    <div class="video-item">
+      <iframe src="https://drive.google.com/file/d/1joNXcLwTWDJfNbBKgO4owDUWAjPUZ_96/preview" allowfullscreen></iframe>
+      <p><strong>『QUEEN』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
+    </div>
+    <div class="video-item">
+      <iframe src="https://drive.google.com/file/d/1-TCY7_iwl6RXKDOLL39qF3idNx1FgOH7/preview" allowfullscreen></iframe>
+      <p><strong>『月のワルツ』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
+    </div>
+    <div class="video-item">
+      <iframe src="https://drive.google.com/file/d/1FuB4w9JEUOnFmiZuSnX5roLtiyblqMwN/preview" allowfullscreen></iframe>
+      <p><strong>『少女レイ』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
+    </div>
+    <div class="video-item">
+      <iframe src="https://drive.google.com/file/d/1brm3tgaYX8e6MBPU6ofu4BHdenm49ZpK/preview" allowfullscreen></iframe>
+      <p><strong>『ヤミタイガール』</strong><br>担当：MIX / マスタリング<br>使用DAW：Cubase Pro 14</p>
     </div>
   </div>
 
   <div class="cta-link">
-    <p><a href="https://sites.google.com/view/akakujira/%E3%83%9B%E3%83%BC%E3%83%A0" target="_blank">▶︎ 歌ってみたMIX依頼はこちら</a></p>
+    <a href="https://sites.google.com/view/akakujira/%E3%83%9B%E3%83%BC%E3%83%A0" target="_blank">▶︎ 歌ってみたMIX依頼はこちら</a>
   </div>
 </section>
 
 <footer>
   &copy; 2025 あかくじら / Twitter: @aka_kujira1234
 </footer>
-
-<!-- JavaScript（クローン＋自動無限スクロール） -->
-<script>
-  const scrollContainer = document.getElementById('videoScroll');
-
-  const cloneVideos = () => {
-    const items = [...scrollContainer.children];
-    items.forEach(item => {
-      const clone = item.cloneNode(true);
-      scrollContainer.appendChild(clone);
-    });
-  };
-
-  let scrollSpeed = 1;
-  let animationId;
-
-  const smoothScroll = () => {
-    scrollContainer.scrollLeft += scrollSpeed;
-    const maxScroll = scrollContainer.scrollWidth / 2;
-    if (scrollContainer.scrollLeft >= maxScroll) {
-      scrollContainer.scrollLeft = 0;
-    }
-    animationId = requestAnimationFrame(smoothScroll);
-  };
-
-  const stopScroll = () => cancelAnimationFrame(animationId);
-
-  scrollContainer.addEventListener('mouseenter', stopScroll);
-  scrollContainer.addEventListener('mouseleave', smoothScroll);
-  scrollContainer.addEventListener('touchstart', stopScroll);
-
-  document.addEventListener('touchstart', function(e) {
-    if (!e.target.closest('#videoScroll')) smoothScroll();
-  });
-
-  window.addEventListener('wheel', function(e) {
-    if (!e.shiftKey && e.target.closest('#videoScroll')) {
-      e.preventDefault();
-      scrollContainer.scrollLeft += e.deltaY;
-    }
-  }, { passive: false });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    cloneVideos();
-    smoothScroll();
-  });
-</script>
 
 </body>
 </html>
