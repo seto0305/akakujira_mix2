@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>歌ってみたMIX ポートフォリオ</title>
   <style>
     @font-face {
       font-family: 'PixelMplus';
-      src: url('https://cdn.jsdelivr.net/gh/qrac/pixelmplus/pixelmplus-10-regular.woff2') format('woff2'),
-           url('https://cdn.jsdelivr.net/gh/qrac/pixelmplus/pixelmplus-10-regular.woff') format('woff');
+      src: url('https://cdn.jsdelivr.net/gh/qrac/pixelmplus@latest/pixelmplus-10-regular.woff2') format('woff2'),
+           url('https://cdn.jsdelivr.net/gh/qrac/pixelmplus@latest/pixelmplus-10-regular.woff') format('woff');
       font-weight: normal;
       font-style: normal;
     }
@@ -63,10 +63,10 @@
 
     .video-scroll-wrapper {
       display: flex;
-      gap: 20px;
       overflow-x: auto;
-      padding-bottom: 20px;
+      gap: 20px;
       scroll-behavior: smooth;
+      padding-bottom: 20px;
     }
 
     .video-scroll-wrapper::-webkit-scrollbar {
@@ -170,16 +170,26 @@
 
 <script>
   const scrollContainer = document.getElementById('videoScroll');
+
+  // 動画要素をクローンしてループ可能な長さにする
+  const items = Array.from(scrollContainer.children);
+  items.forEach(item => scrollContainer.appendChild(item.cloneNode(true)));
+
+  // 自動スクロール処理
+  let scrollSpeed = 1;
   function autoScroll() {
-    scrollContainer.scrollLeft += 1;
+    scrollContainer.scrollLeft += scrollSpeed;
     if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
       scrollContainer.scrollLeft = 0;
     }
     requestAnimationFrame(autoScroll);
   }
+
   document.addEventListener('DOMContentLoaded', () => {
     autoScroll();
   });
+
+  // マウスホイールで横スクロール対応
   scrollContainer.addEventListener('wheel', function(e) {
     if (!e.shiftKey) {
       e.preventDefault();
