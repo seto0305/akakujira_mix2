@@ -10,21 +10,34 @@
       font-family: 'Noto Sans JP', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #121212;
+      background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
       color: #e0e0e0;
     }
 
     header {
-      background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
       padding: 80px 20px;
       text-align: center;
       color: #ffffff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      overflow: hidden;
     }
 
     header h1 {
       font-size: 3em;
       margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #bb86fc;
+      animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #bb86fc }
     }
 
     header p {
@@ -66,11 +79,14 @@
       flex-shrink: 0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
       border-top: 4px solid #bb86fc;
-      transition: transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
     }
 
-    .video-item:hover {
-      transform: translateY(-5px);
+    .video-item.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .video-item iframe {
@@ -100,11 +116,18 @@
       text-decoration: none;
       font-weight: bold;
       transition: 0.3s;
+      animation: pulse 2s infinite;
     }
 
     .cta-link a:hover {
       background-color: #bb86fc;
       color: #121212;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 #bb86fc88; }
+      70% { box-shadow: 0 0 0 15px transparent; }
+      100% { box-shadow: 0 0 0 0 transparent; }
     }
 
     footer {
@@ -164,6 +187,61 @@
 <footer>
   &copy; 2025 あかくじら / Twitter: @aka_kujira1234
 </footer>
+
+<script>
+  const scrollContainer = document.getElementById('videoScroll');
+
+  // クローンで無限スクロール
+  const cloneVideos = () => {
+    const items = [...scrollContainer.children];
+    items.forEach(item => {
+      const clone = item.cloneNode(true);
+      scrollContainer.appendChild(clone);
+    });
+  };
+
+  // 自動スクロール
+  let scrollSpeed = 1;
+  let animationId;
+  const autoScroll = () => {
+    scrollContainer.scrollLeft += scrollSpeed;
+    if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+      scrollContainer.scrollLeft = 0;
+    }
+    animationId = requestAnimationFrame(autoScroll);
+  };
+
+  const stopScroll = () => cancelAnimationFrame(animationId);
+
+  // IntersectionObserverで動画カード表示アニメーション
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    cloneVideos();
+    document.querySelectorAll('.video-item').forEach(el => observer.observe(el));
+    autoScroll();
+  });
+
+  // スクロール操作対応
+  scrollContainer.addEventListener('mouseenter', stopScroll);
+  scrollContainer.addEventListener('mouseleave', autoScroll);
+  scrollContainer.addEventListener('touchstart', stopScroll);
+
+  document.addEventListener('touchstart', function(e) {
+    if (!e.target.closest('#videoScroll')) autoScroll();
+  });
+
+  scrollContainer.addEventListener('wheel', function(e) {
+    if (!e.shiftKey) {
+      e.preventDefault();
+      scrollContainer.scrollLeft += e.deltaY;
+    }
+  }, { passive: false });
+</script>
 
 </body>
 </html>
